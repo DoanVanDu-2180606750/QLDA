@@ -1,4 +1,6 @@
 import 'package:banking/Screen/CardDetails.dart';
+import 'package:banking/Screen/SignIn.dart';
+import 'package:banking/Services/authGg_service.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isDarkMode = false;
+  final _authGg = AuthGgService();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
                   value: 'logout',
-                  child: Text('Logout'),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      _authGg.signOut();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+                    }
+                  , child: Icon(Icons.logout)
+                  ),
                 ),
                 PopupMenuItem<String>(
                   value: 'dark_mode',

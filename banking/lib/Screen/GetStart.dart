@@ -1,5 +1,7 @@
+import 'package:banking/Screen/Main.dart';
 import 'package:banking/Screen/SignIn.dart';
 import 'package:banking/Screen/SignUp.dart';
+import 'package:banking/Services/authGg_service.dart';
 import 'package:flutter/material.dart';
 
 class GetStartScreen extends StatefulWidget {
@@ -17,6 +19,18 @@ class GetStartScreen extends StatefulWidget {
 }
 
 class _GetStartScreenState extends State<GetStartScreen> {
+  final _authGg = AuthGgService();
+
+  Future <void> _googleLogin() async {
+    try{
+      final user = await _authGg.signInWithGoogle();
+      if (user != null) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainScreen()));
+      }
+    }catch(e){
+      print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +117,9 @@ class _GetStartScreenState extends State<GetStartScreen> {
               ),
               SizedBox(height: 15),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  _googleLogin();
+                },
                 icon: Icon(Icons.g_mobiledata, color: Colors.red, size: 30),
                 label: Text('Sign With Google'),
                 style: ElevatedButton.styleFrom(

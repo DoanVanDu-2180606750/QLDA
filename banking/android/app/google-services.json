@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826985992317",
+    "project_id": "qlda-50910",
+    "storage_bucket": "qlda-50910.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826985992317:android:8b528c891c819bba22e114",
+        "android_client_info": {
+          "package_name": "com.example.banking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi1bJmasgd_54YfyxS9qTvsPJ2SO5ElBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

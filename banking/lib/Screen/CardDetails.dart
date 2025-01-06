@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +12,10 @@ class CardDetailsScreen extends StatefulWidget {
 
 class CardDetailsScreenState extends State<CardDetailsScreen> {
   final List<CardItem> cardItems = [
-    CardItem('Văn Dự', '\$5,756', '12/22', '3778 **** **** 1234'),
-    CardItem('Bảo Ngân', '\$10,756', '12/22', '3778 **** **** 5678'),
+    CardItem('Văn Dự', 'MB', '\$5,756',  '12/22', '3778 **** **** 1234' ),
+    CardItem('Bảo Ngân','MB', '\$10,756', '12/22', '3778 **** **** 5678'),
   ];
-
+  int money = Random( 100).nextInt(10000);
   final _cardTypeController = TextEditingController();
   final _nameController = TextEditingController();
   final _numberController = TextEditingController();
@@ -78,25 +80,55 @@ class CardDetailsScreenState extends State<CardDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Balance', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 14)),
-          SizedBox(height: 8),
-          Text(cardItem.balance, style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
-          SizedBox(height: 24),
-          Text('CARD HOLDER', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12)),
-          SizedBox(height: 4),
-          Text(cardItem.holder, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-          SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('VALID THRU', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12)),
-                  SizedBox(height: 4),
-                  Text(cardItem.validThru, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text('Balance', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 16)),
+                  SizedBox(height: 8),
+                  Text(cardItem.balance, style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
                 ],
               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Card Type', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize : 16)),
+                  SizedBox(height: 8),
+                  Text(cardItem.type, style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              
+            ],
+          ),
+          SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text('CARD HOLDER', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12)),
+                  SizedBox(height: 4),
+                  Text(cardItem.holder, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              SizedBox(height: 16),
+              Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('VALID THRU', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12)),
+                      SizedBox(height: 4),
+                      Text(cardItem.validThru, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              
               Text(
                 cardItem.number,
                 style: TextStyle(
@@ -228,7 +260,8 @@ class CardDetailsScreenState extends State<CardDetailsScreen> {
                 setState(() {
                   cardItems.add(CardItem(
                     _nameController.text,
-                    '\$0.00',
+                    _cardTypeController.text,
+                    '\$ $money',
                     _expiryController.text,
                     _numberController.text,
                   ));
@@ -254,9 +287,10 @@ class CardDetailsScreenState extends State<CardDetailsScreen> {
 
 class CardItem {
   final String holder;
+  final String type;
   final String balance;
   final String validThru;
   final String number;
 
-  CardItem(this.holder, this.balance, this.validThru, this.number);
+  CardItem(this.holder, this.type, this.balance, this.validThru, this.number);
 }
