@@ -1,6 +1,6 @@
 import 'package:banking/Screen/Budget.dart';
 import 'package:banking/Screen/Home.dart';
-import 'package:banking/Screen/Payment.dart';
+import 'package:banking/Screen/Expense.dart';
 import 'package:banking/Screen/Transfer.dart';
 import 'package:banking/Screen/User.dart';
 import 'package:flutter/material.dart';
